@@ -264,9 +264,9 @@
                           name="options[{{ option.name | escape }}]"
                           form="product-form-{{ section.id }}"
                         >
-                        <option value="" disabled selected>{{ option.name }}</option>
+                        <option value="" disabled {%- if product.selected_variant == null -%} selected {%- endif -%}>{{ option.name }}</option>
                           {%- for value in option.values -%}
-                            <option value="{{ value | escape }}">
+                            <option value="{{ value | escape }}" {% if option.selected_value == value and product.selected_variant != null %}selected="selected"{% endif %}>
                               {{ value }}
                             </option>
                           {%- endfor -%}
@@ -316,12 +316,12 @@
                       type="submit"
                       name="add"
                       class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
-                    {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                    {% if product.selected_variant == null or product.selected_variant.available == false %}disabled{% endif %}
                     >
-                        {%- if product.selected_or_first_available_variant.available -%}
+                        {%- if product.selected_variant.available -%}
                           {{ 'products.product.add_to_cart' | t }}
-                        {% elsif product.selected_or_first_available_variant.available == false %}
-                        Choose waist and length
+                        {% elsif product.selected_variant == null %}
+                        {{ 'products.product.unavailable' | t }}
                         {%- else -%}
                           {{ 'products.product.sold_out' | t }}
                         {%- endif -%}
