@@ -46,7 +46,7 @@
 }
 
 .card--text-only::before {
-  content: '';
+  content: "";
   display: block;
   padding-bottom: 100%;
 }
@@ -178,6 +178,9 @@
 
 .card-information__wrapper {
   width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .card-information__wrapper > * {
@@ -189,12 +192,12 @@
   color: rgb(var(--color-foreground));
 }
 
-.card-information__wrapper > *:not(.visually-hidden:first-child) + * {
-  margin-top: 1.1rem;
-}
-
 .card-information__wrapper .caption {
   letter-spacing: 0.07rem;
+}
+
+.card-information .price dd {
+  margin: 0;
 }
 
 .card-wrapper {
@@ -292,16 +295,16 @@
   .card--search img {
     transition: transform var(--duration-default) ease;
   }
-  
+
   .card-wrapper:hover .card--search img {
     transform: scale(1.05);
   }
-  
+
   .card-wrapper:hover .card__heading {
     text-decoration: underline;
     text-underline-offset: 0.3rem;
   }
-  
+
   .card-wrapper:hover .card.card--search {
     background-color: rgba(var(--color-card-hover), 0.06);
     transition: background-color var(--duration-long) ease;

@@ -10,7 +10,7 @@
   {%- endstyle -%}
 {%- endif -%}
 
-<div id="Banner-{{ section.id }}" class="banner{% if section.settings.stack_images_on_mobile and section.settings.image != blank and section.settings.image_2 != blank%} banner--stacked{% endif %}{% if section.settings.adapt_height_first_image and section.settings.image != blank %} banner--adapt{% endif %}">
+<div id="Banner-{{ section.id }}" class="banner banner--stacked{% if section.settings.adapt_height_first_image and section.settings.image != blank %} banner--adapt{% endif %}">
   {%- if section.settings.image != blank -%}
     <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}">
       <img srcset="{%- if section.settings.image.width >= 375 -%}{{ section.settings.image | img_url: '375x' }} 375w,{%- endif -%}
@@ -20,7 +20,7 @@
         {%- if section.settings.image.width >= 1780 -%}{{ section.settings.image | img_url: '1780x' }} 1780w,{%- endif -%}
         {%- if section.settings.image.width >= 2000 -%}{{ section.settings.image | img_url: '2000x' }} 2000w,{%- endif -%}
         {%- if section.settings.image.width >= 2800 -%}{{ section.settings.image | img_url: '2800x' }} 2800w{%- endif -%}"
-        sizes="{% if section.settings.image_2 != blank and section.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% elsif section.settings.image_2 != blank %}50vw{% else %}100vw{% endif %}"
+        sizes="{% if section.settings.image_2 != blank%}(min-width: 750px) 50vw, 100vw{% elsif section.settings.image_2 != blank %}50vw{% else %}100vw{% endif %}"
         src="{{ section.settings.image | img_url: '750x' }}"
         loading="lazy"
         alt="{{ section.settings.image.alt | escape }}"
@@ -43,7 +43,7 @@
         {%- if section.settings.image_2.width >= 1780 -%}{{ section.settings.image_2 | img_url: '1780x' }} 1780w,{%- endif -%}
         {%- if section.settings.image_2.width >= 2000 -%}{{ section.settings.image_2 | img_url: '2000x' }} 2000w,{%- endif -%}
         {%- if section.settings.image_2.width >= 2800 -%}{{ section.settings.image_2 | img_url: '2800x' }} 2800w{%- endif -%}"
-        sizes="{% if section.settings.image != blank and section.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% elsif section.settings.image != blank %}50vw{% else %}100vw{% endif %}"
+        sizes="{% if section.settings.image != blank %}(min-width: 750px) 50vw, 100vw{% else %}100vw{% endif %}"
         src="{{ section.settings.image_2 | img_url: '750x' }}"
         loading="lazy"
         alt="{{ section.settings.image_2.alt | escape }}"
@@ -139,16 +139,18 @@
         {
           "value": "inverse",
           "label": "t:sections.image-banner.settings.color_scheme.options__5.label"
+        },
+        {
+          "value": "transparent-white",
+          "label": "t:sections.image-banner.settings.color_scheme.options__6.label"
+        },
+        {
+          "value": "transparent-black",
+          "label": "t:sections.image-banner.settings.color_scheme.options__7.label"
         }
       ],
       "default": "background-1",
       "label": "t:sections.image-banner.settings.color_scheme.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "stack_images_on_mobile",
-      "default": true,
-      "label": "t:sections.image-banner.settings.stack_images_on_mobile.label"
     },
     {
       "type": "checkbox",

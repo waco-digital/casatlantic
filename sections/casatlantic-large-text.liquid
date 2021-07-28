@@ -1,0 +1,71 @@
+{{ 'casatlantic-section-large-text.css' | asset_url | stylesheet_tag }}
+
+<div class="casatlantic-large-text center page-width page-width--narrow spaced-section">
+    {%- for block in section.blocks -%}
+        {%- case block.type -%}
+            {%- when 'heading' -%}
+                <h2 class="casatlantic-banner__heading h1" {{ block.shopify_attributes }}>
+                    <span>{{ block.settings.heading | escape }}</span>
+                </h2>
+            {%- when 'buttons' -%}
+                <div class="casatlantic-banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_link_1 != blank and block.settings.button_label_2 != blank and block.settings.button_link_2 != blank %} casatlantic-banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
+                    {%- if block.settings.button_label_1 != blank -%}
+                        <a {% if block.settings.button_link_1 != blank %} href="{{ block.settings.button_link_1 }}" {% endif %} class="{% if block.settings.button_style_secondary_1 %}button button--secondary{% else %}underlined-link link--text{% endif %}" {% if block.settings.button_link_1 == blank %} aria-disabled="true" {% endif %}>{{ block.settings.button_label_1 | escape }}</a>
+                    {%- endif -%}
+                </div>
+        {%- endcase -%}
+    {%- endfor -%}
+</div>
+
+{% schema %}
+
+{
+    "name": "t:sections.casatlantic-large-text.name",
+    "tag": "section",
+    "class": "spaced-section",
+    "settings": [],
+    "blocks": [
+        {
+            "type": "heading",
+            "name": "t:sections.casatlantic-image-banner.blocks.heading.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "heading",
+                    "default": "Image banner",
+                    "label": "t:sections.casatlantic-image-banner.blocks.heading.settings.heading.label"
+                }
+            ]
+        }, {
+            "type": "buttons",
+            "name": "t:sections.casatlantic-image-banner.blocks.buttons.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "button_label_1",
+                    "default": "Button label",
+                    "label": "t:sections.casatlantic-image-banner.blocks.buttons.settings.button_label_1.label",
+                    "info": "t:sections.casatlantic-image-banner.blocks.buttons.settings.button_label_1.info"
+                }, {
+                    "type": "url",
+                    "id": "button_link_1",
+                    "label": "t:sections.casatlantic-image-banner.blocks.buttons.settings.button_link_1.label"
+                }, {
+                    "type": "checkbox",
+                    "id": "button_style_secondary_1",
+                    "default": false,
+                    "label": "t:sections.casatlantic-image-banner.blocks.buttons.settings.button_style_secondary_1.label"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "t:sections.casatlantic-large-text.presets.name"
+        }
+    ]
+}
+
+{% endschema %}

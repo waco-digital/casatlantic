@@ -74,7 +74,7 @@
   </symbol>
 </svg>
 <{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %} class="header-wrapper{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
-  <header class="header header--{{ section.settings.logo_position }} page-width{% if section.settings.menu != blank %} header--has-menu{% endif %}">
+  <header class="header header--{{ section.settings.logo_position }} page-width{% if section.settings.menu != blank %} header--has-menu{% endif %} {% if handle == null %} startpage {% endif %}">
     {%- if section.settings.menu != blank -%}
       <header-drawer data-breakpoint="tablet">
         <details class="menu-drawer-container">
@@ -350,6 +350,49 @@
     {%- endif -%}
 
     <div class="header__icons">
+
+      <div class="header__localization">
+          <noscript>
+              {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
+                <div class="localization-form__select">
+                  <h2 class="visually-hidden" id="FooterCountryLabelNoScript">{{ 'localization.country_label' | t }}</h2>
+                  <select class="localization-selector link" name="country_code" aria-labelledby="FooterCountryLabelNoScript">
+                    {%- for country in localization.available_countries -%}
+                      <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
+                        {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                  {% render 'icon-caret' %}
+                </div>
+                <button class="button button--tertiary">{{ 'localization.update_country' | t }}</button>
+              {%- endform -%}
+            </noscript>
+            <localization-form>
+              {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
+                <div class="no-js-hidden header__localization-wrapper">
+                  <!-- <h2 class="caption-large" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2> -->
+                  <div class="disclosure">
+                    <button type="button" class="disclosure__button localization-form__select localization-selector link link--text caption-large" aria-expanded="false" aria-controls="FooterCountryList" aria-describedby="FooterCountryLabel">
+                      Shipping to 
+                      {{ localization.country.name }}
+                      {% render 'icon-caret' %}
+                    </button>
+                    <ul id="FooterCountryList" role="list" class="disclosure__list list-unstyled" hidden>
+                      {%- for country in localization.available_countries -%}
+                        <li class="disclosure__item" tabindex="-1">
+                          <a class="link link--text disclosure__link caption-large{% if country.iso_code == localization.country.iso_code %} disclosure__link--active{% endif %} focus-inset" href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">
+                            {{ country.name }}
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                  <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+                </div>
+              {%- endform -%}
+            </localization-form>
+      </div>
       <details-modal class="header__search">
         <details>
           <summary class="header__icon header__icon--search header__icon--summary link link--text focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
@@ -428,181 +471,169 @@
 {%- endif -%}
 
 {% javascript %}
-  class StickyHeader extends HTMLElement {
+
+class StickyHeader extends HTMLElement {
     constructor() {
-      super();
+        super();
     }
 
     connectedCallback() {
-      this.header = document.getElementById('shopify-section-header');
-      this.headerBounds = {};
-      this.currentScrollTop = 0;
+        this.header = document.getElementById('shopify-section-header');
+        this.headerBounds = {};
+        this.currentScrollTop = 0;
 
-      this.onScrollHandler = this.onScroll.bind(this);
+        this.onScrollHandler = this.onScroll.bind(this);
 
-      window.addEventListener('scroll', this.onScrollHandler, false);
+        window.addEventListener('scroll', this.onScrollHandler, false);
 
-      this.createObserver();
+        this.createObserver();
     }
 
     disconnectedCallback() {
-      window.removeEventListener('scroll', this.onScrollHandler);
+        window.removeEventListener('scroll', this.onScrollHandler);
     }
 
     createObserver() {
-      let observer = new IntersectionObserver((entries, observer) => {
-        this.headerBounds = entries[0].intersectionRect;
-        observer.disconnect();
-      });
+        let observer = new IntersectionObserver((entries, observer) => {
+            this.headerBounds = entries[0].intersectionRect;
+            observer.disconnect();
+        });
 
-      observer.observe(this.header);
+        observer.observe(this.header);
     }
 
     onScroll() {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-      if (scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
-        requestAnimationFrame(this.hide.bind(this));
-      } else if (scrollTop < this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
-        requestAnimationFrame(this.reveal.bind(this));
-      } else if (scrollTop <= this.headerBounds.top) {
-        requestAnimationFrame(this.reset.bind(this));
-      }
+        if (scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+            // requestAnimationFrame(this.hide.bind(this));
+            requestAnimationFrame(this.reveal.bind(this));
+        } else if (scrollTop < this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+            requestAnimationFrame(this.reveal.bind(this));
+        } else if (scrollTop <= this.headerBounds.top) {
+            requestAnimationFrame(this.reset.bind(this));
+        }
 
-      this.currentScrollTop = scrollTop;
+        this.currentScrollTop = scrollTop;
     }
 
     hide() {
-      this.header.classList.add('shopify-section-header-hidden', 'shopify-section-header-sticky');
-      this.closeMenuDisclosure();
-      this.closeSearchModal();
+        this.header.classList.add('shopify-section-header-hidden', 'shopify-section-header-sticky');
+        this.closeMenuDisclosure();
+        this.closeSearchModal();
     }
 
     reveal() {
-      this.header.classList.add('shopify-section-header-sticky', 'animate');
-      this.header.classList.remove('shopify-section-header-hidden');
+        this.header.classList.add('shopify-section-header-sticky', 'animate');
+        this.header.classList.remove('shopify-section-header-hidden');
     }
 
     reset() {
-      this.header.classList.remove('shopify-section-header-hidden', 'shopify-section-header-sticky', 'animate');
+        this.header.classList.remove('shopify-section-header-hidden', 'shopify-section-header-sticky', 'animate');
     }
 
     closeMenuDisclosure() {
-      this.disclosures = this.disclosures || this.header.querySelectorAll('details-disclosure');
-      this.disclosures.forEach(disclosure => disclosure.close());
+        this.disclosures = this.disclosures || this.header.querySelectorAll('details-disclosure');
+        this.disclosures.forEach(disclosure => disclosure.close());
     }
 
     closeSearchModal() {
-      this.searchModal = this.searchModal || this.header.querySelector('details-modal');
-      this.searchModal.close(false);
+        this.searchModal = this.searchModal || this.header.querySelector('details-modal');
+        this.searchModal.close(false);
     }
-  }
+}
 
-  customElements.define('sticky-header', StickyHeader);
+customElements.define('sticky-header', StickyHeader);
+
 {% endjavascript %}
 
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Organization",
-    "name": {{ shop.name | json }},
-    {% if section.settings.logo %}
-      {% assign image_size = section.settings.logo.width | append: 'x' %}
-      "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
-    {% endif %}
-    "sameAs": [
-      {{ settings.social_twitter_link | json }},
-      {{ settings.social_facebook_link | json }},
-      {{ settings.social_pinterest_link | json }},
-      {{ settings.social_instagram_link | json }},
-      {{ settings.social_tumblr_link | json }},
-      {{ settings.social_snapchat_link | json }},
-      {{ settings.social_youtube_link | json }},
-      {{ settings.social_vimeo_link | json }}
-    ],
-    "url": {{ shop.url | append: page.url | json }}
-  }
+
+
+[36mLine: 1[0m
+[31m[36 mLine : 1 [[0m
+[31m        0 m [[0m
+[31m            31 m[[0m
+[31m                36 mLine : 2 [[0m
+[31m                    [[0m
+[31m                        0 m [[0m
+[31m                            31 m 0 m [[0m
+
 </script>
 
 {%- if request.page_type == 'index' -%}
   {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
   <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "WebSite",
-      "name": {{ shop.name | json }},
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {{ potential_action_target | json }},
-        "query-input": "required name=search_term_string"
-      },
-      "url": {{ shop.url | append: page.url | json }}
-    }
-  </script>
+
+
+[36mLine: 1[0m
+[31m[36 mLine : 1 [[0m
+[31m        0 m [[0m
+[31m            31 m[[0m
+[31m                36 mLine : 2 [[0m
+[31m                    [[0m
+[31m                        0 m [[0m
+[31m                            31 m 0 m [[0m
+
+</script>
 {%- endif -%}
 
 {% schema %}
+
 {
-  "name": "t:sections.header.name",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "t:sections.header.settings.logo.label"
-    },
-    {
-      "type": "range",
-      "id": "logo_width",
-      "min": 50,
-      "max": 300,
-      "step": 10,
-      "default": 100,
-      "unit": "t:sections.header.settings.logo_width.unit",
-      "label": "t:sections.header.settings.logo_width.label"
-    },
-    {
-      "type": "select",
-      "id": "logo_position",
-      "options": [
+    "name": "t:sections.header.name",
+    "settings": [
         {
-          "value": "middle-left",
-          "label": "t:sections.header.settings.logo_position.options__1.label"
-        },
-        {
-          "value": "middle-center",
-          "label": "t:sections.header.settings.logo_position.options__4.label"
-        },
-        {
-          "value": "top-left",
-          "label": "t:sections.header.settings.logo_position.options__2.label"
-        },
-        {
-          "value": "top-center",
-          "label": "t:sections.header.settings.logo_position.options__3.label"
+            "type": "image_picker",
+            "id": "logo",
+            "label": "t:sections.header.settings.logo.label"
+        }, {
+            "type": "range",
+            "id": "logo_width",
+            "min": 50,
+            "max": 300,
+            "step": 10,
+            "default": 100,
+            "unit": "t:sections.header.settings.logo_width.unit",
+            "label": "t:sections.header.settings.logo_width.label"
+        }, {
+            "type": "select",
+            "id": "logo_position",
+            "options": [
+                {
+                    "value": "middle-left",
+                    "label": "t:sections.header.settings.logo_position.options__1.label"
+                }, {
+                    "value": "middle-center",
+                    "label": "t:sections.header.settings.logo_position.options__4.label"
+                }, {
+                    "value": "top-left",
+                    "label": "t:sections.header.settings.logo_position.options__2.label"
+                }, {
+                    "value": "top-center",
+                    "label": "t:sections.header.settings.logo_position.options__3.label"
+                }
+            ],
+            "default": "middle-center",
+            "label": "t:sections.header.settings.logo_position.label"
+        }, {
+            "type": "link_list",
+            "id": "menu",
+            "default": "main-menu",
+            "label": "t:sections.header.settings.menu.label"
+        }, {
+            "type": "checkbox",
+            "id": "show_line_separator",
+            "default": true,
+            "label": "t:sections.header.settings.show_line_separator.label"
+        }, {
+            "type": "checkbox",
+            "id": "enable_sticky_header",
+            "default": true,
+            "label": "t:sections.header.settings.enable_sticky_header.label",
+            "info": "t:sections.header.settings.enable_sticky_header.info"
         }
-      ],
-      "default": "middle-left",
-      "label": "t:sections.header.settings.logo_position.label"
-    },
-    {
-      "type": "link_list",
-      "id": "menu",
-      "default": "main-menu",
-      "label": "t:sections.header.settings.menu.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_line_separator",
-      "default": true,
-      "label": "t:sections.header.settings.show_line_separator.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_sticky_header",
-      "default": true,
-      "label": "t:sections.header.settings.enable_sticky_header.label",
-      "info": "t:sections.header.settings.enable_sticky_header.info"
-    }
-  ]
+    ]
 }
+
 {% endschema %}

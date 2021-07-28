@@ -1,4 +1,4 @@
-slider-component {
+.slider-component {
   position: relative;
   display: block;
 }
@@ -55,7 +55,8 @@ slider-component {
 /* Scrollbar */
 
 .slider {
-  scrollbar-color: rgb(var(--color-foreground)) rgba(var(--color-foreground), 0.04);
+  scrollbar-color: rgb(var(--color-foreground))
+    rgba(var(--color-foreground), 0.04);
   -ms-overflow-style: none;
   scrollbar-width: none;
 }

@@ -202,6 +202,138 @@
         "name": "Apps"
       }
     },
+    "casatlantic-image-banner": {
+      "name": "Casatlantic - Image banner",
+      "settings": {
+        "image": {
+          "label": "First image"
+        },
+        "image_2": {
+          "label": "Second image"
+        },
+        "hide_in_small_screen": {
+          "options__1": {
+            "label": "First image"
+          },
+          "options__2": {
+            "label": "Second image"
+          },
+          "label": "Select image to hide in small screen"
+        },
+        "desktop_text_box_position": {
+          "options__1": {
+            "label": "Top"
+          },
+          "options__2": {
+            "label": "Center"
+          },
+          "options__3": {
+            "label": "Bottom"
+          },
+          "label": "Desktop text position"
+        },
+        "color_scheme": {
+          "options__1": {
+            "label": "Accent 1"
+          },
+          "options__2": {
+            "label": "Accent 2"
+          },
+          "options__3": {
+            "label": "Background 1"
+          },
+          "options__4": {
+            "label": "Background 2"
+          },
+          "options__5": {
+            "label": "Inverse"
+          },
+          "options__6": {
+            "label": "Transparent - White text"
+          },
+          "options__7": {
+            "label": "Transparent - black text"
+          },
+          "label": "Color scheme"
+        },
+        "horizontal_padding": {
+          "label": "Add horizontal padding"
+        }
+      },
+      "blocks": {
+        "heading": {
+          "name": "Heading",
+          "settings": {
+            "heading": {
+              "label": "Heading"
+            }
+          }
+        },
+        "text": {
+          "name": "Text",
+          "settings": {
+            "text": {
+              "label": "Description"
+            }
+          }
+        },
+        "buttons": {
+          "name": "Buttons",
+          "settings": {
+            "button_label_1": {
+              "label": "First button label",
+              "info": "Leave the label blank to hide the button."
+            },
+            "button_link_1": {
+              "label": "First button link"
+            },
+            "button_style_secondary_1": {
+              "label": "Display link as button"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Casatlantic - Image banner"
+      }
+    },
+    "casatlantic-large-text": {
+      "name": "Casatlantic - Large text",
+      "settings": {},
+      "blocks": {
+        "heading": {
+          "name": "Heading",
+          "settings": {
+            "heading": {
+              "label": "Heading"
+            }
+          }
+        },
+        "text": {
+          "name": "Text",
+          "settings": {
+            "text": {
+              "label": "Description"
+            }
+          }
+        },
+        "link": {
+          "name": "Link",
+          "settings": {
+            "link_label": {
+              "label": "Link Label",
+              "info": "Leave the label blank to hide the button."
+            },
+            "link": {
+              "label": "Link URL"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Casatlantic - Large text"
+      }
+    },
     "collage": {
       "name": "Collage",
       "settings": {
@@ -651,6 +783,12 @@
           "options__5": {
             "label": "Inverse"
           },
+          "options__6": {
+            "label": "Transparent - White text"
+          },
+          "options__7": {
+            "label": "Transparent - black text"
+          },
           "label": "Color scheme"
         },
         "stack_images_on_mobile": {
@@ -1089,6 +1227,12 @@
         },
         "title": {
           "name": "Title"
+        },
+        "type": {
+          "name": "Type"
+        },
+        "color": {
+          "name": "Color"
         },
         "price": {
           "name": "Price"
