@@ -258,6 +258,9 @@
         },
         "horizontal_padding": {
           "label": "Add horizontal padding"
+        },
+        "max_height": {
+          "label": "Max height for section"
         }
       },
       "blocks": {
@@ -297,6 +300,71 @@
         "name": "Casatlantic - Image banner"
       }
     },
+    "casatlantic-multilink-banner": {
+      "name": "Casatlantic - Multilink banner",
+      "settings": {
+        "image": {
+          "label": "First column - Image"
+        },
+        "button_text": {
+          "label": "First column - Button Label"
+        },
+        "button_link": {
+          "label": "First column - Button link"
+        },
+        "image_2": {
+          "label": "Second column - Second image"
+        },
+        "button_text_2": {
+          "label": "Second column - Button Label"
+        },
+        "button_link_2": {
+          "label": "Second column - Button link"
+        },
+        "desktop_text_box_position": {
+          "options__1": {
+            "label": "Top"
+          },
+          "options__2": {
+            "label": "Center"
+          },
+          "options__3": {
+            "label": "Bottom"
+          },
+          "label": "Desktop text position"
+        },
+        "color_scheme": {
+          "options__1": {
+            "label": "Accent 1"
+          },
+          "options__2": {
+            "label": "Accent 2"
+          },
+          "options__3": {
+            "label": "Background 1"
+          },
+          "options__4": {
+            "label": "Background 2"
+          },
+          "options__5": {
+            "label": "Inverse"
+          },
+          "options__6": {
+            "label": "Transparent - White text"
+          },
+          "options__7": {
+            "label": "Transparent - black text"
+          },
+          "label": "Color scheme"
+        },
+        "horizontal_padding": {
+          "label": "Add horizontal padding"
+        }
+      },
+      "presets": {
+        "name": "Casatlantic - Multilink banner"
+      }
+    },
     "casatlantic-large-text": {
       "name": "Casatlantic - Large text",
       "settings": {},
@@ -332,6 +400,20 @@
       },
       "presets": {
         "name": "Casatlantic - Large text"
+      }
+    },
+    "casatlantic-video": {
+      "name": "Casatlantic - Video",
+      "settings": {
+        "video_url": {
+          "label": "Video url"
+        },
+        "horizontal_padding": {
+          "label": "Add horizontal padding"
+        }
+      },
+      "presets": {
+        "name": "Casatlantic - Video"
       }
     },
     "collage": {
@@ -743,6 +825,53 @@
         "enable_sticky_header": {
           "label": "Enable sticky header",
           "info": "Header shows on the screen as customers scroll up."
+        }
+      },
+      "blocks": {
+        "megamenu": {
+          "name": "Megamenu",
+          "settings": {
+            "megamenu_handle": {
+              "label": "Menu item name",
+              "info": "Same name as menu item has under Online Store => Navigation"
+            },
+            "megamenu_col_1_label": {
+              "label": "First column label"
+            },
+            "megamenu_col_1_image": {
+              "label": "First column image"
+            },
+            "megamenu_col_1_url": {
+              "label": "First column url"
+            },
+            "megamenu_col_2_label": {
+              "label": "Second column label"
+            },
+            "megamenu_col_2_image": {
+              "label": "Second column image"
+            },
+            "megamenu_col_2_url": {
+              "label": "Second column url"
+            },
+            "megamenu_col_3_label": {
+              "label": "Third column label"
+            },
+            "megamenu_col_3_image": {
+              "label": "Third column image"
+            },
+            "megamenu_col_3_url": {
+              "label": "Third column url"
+            },
+            "megamenu_col_4_label": {
+              "label": "Fourth column label"
+            },
+            "megamenu_col_4_image": {
+              "label": "Fourth column image"
+            },
+            "megamenu_col_4_url": {
+              "label": "Fourth column url"
+            }
+          }
         }
       }
     },

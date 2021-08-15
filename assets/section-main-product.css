@@ -27,12 +27,9 @@
     position: sticky;
     top: 14rem;
     z-index: 2;
-    max-width: 480px;
+    max-width: calc(480px + 2rem);
+    padding: 2rem;
     margin: auto;
-  }
-
-  .product__info-wrapper {
-    padding-left: 5rem;
   }
 
   .product__media-container .slider-buttons {
@@ -638,8 +635,8 @@ a.product__text {
 
 .product__price {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 2rem;
+  right: 2rem;
   margin: 0;
   font-size: 1.3rem;
 }

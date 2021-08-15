@@ -161,7 +161,7 @@ html.no-js .no-js-hidden {
 
 @media screen and (min-width: 750px) {
   .page-width {
-    padding: 0 5rem;
+    padding: 0 3.6em;
   }
 
   .page-width--narrow {
@@ -185,15 +185,15 @@ html.no-js .no-js-hidden {
 }
 
 .element-margin {
-  margin-top: 5rem;
+  margin-top: 3.6rem;
 }
 
 .spaced-section {
-  margin-top: 5rem;
+  margin-top: 3.6rem;
 }
 
 .spaced-section:last-child {
-  margin-bottom: 5rem;
+  margin-bottom: 3.6rem;
 }
 
 .spaced-section--full-width + .spaced-section--full-width {
@@ -206,6 +206,16 @@ html.no-js .no-js-hidden {
 
 .spaced-section--full-width:last-child {
   margin-bottom: 0;
+}
+
+@media screen and (max-width: 990px) {
+  .spaced-section {
+    margin-top: 1.6rem;
+  }
+
+  .spaced-section:last-child {
+    margin-bottom: 1.6rem;
+  }
 }
 
 body {
@@ -609,6 +619,7 @@ details > * {
   padding: 1.5rem;
   position: relative;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 .underlined-link:before {
@@ -1081,7 +1092,7 @@ deferred-media {
   border: 1px solid currentColor;
   color: rgb(var(--color-button-text));
   min-width: 12rem;
-  min-height: 4.5rem;
+  min-height: 4.8rem;
   transition: box-shadow var(--duration-short) ease;
   -webkit-appearance: none;
   appearance: none;
@@ -1645,6 +1656,12 @@ input[type="checkbox"] {
   transition: transform 0.15s ease-out;
 }
 
+@media screen and (max-width: 989px) {
+  .header__localization {
+    display: none;
+  }
+}
+
 .header__localization-wrapper .disclosure__button:not(#foo) {
   box-shadow: none;
   margin: 0;
@@ -1701,24 +1718,25 @@ input[type="checkbox"] {
 }
 
 #shopify-section-header:not(.shopify-section-header-sticky)
-  .header.startpage
+  .header.index-pagetype
   .header__heading-logo {
   filter: brightness(0) invert(1);
 }
 #shopify-section-header:not(.shopify-section-header-sticky)
-  .header.startpage
+  .header.index-pagetype
   .header__menu-item,
 #shopify-section-header:not(.shopify-section-header-sticky)
-  .header.startpage
+  .header.index-pagetype
   .header__active-menu-item,
 #shopify-section-header:not(.shopify-section-header-sticky)
-  .header.startpage
+  .header.index-pagetype
   .link--text {
   color: #fff;
 }
 
 @media screen and (min-width: 990px) {
   .header {
+    margin: 0 -1.2rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
   }
@@ -2031,11 +2049,6 @@ details[open] > .header__icon--menu .icon-hamburger {
   transition: text-decoration var(--duration-short) ease;
 }
 
-.header__menu-item:hover span {
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
-}
-
 .header__active-menu-item {
   transition: text-decoration-thickness var(--duration-short) ease;
   color: rgb(var(--color-foreground));
@@ -2053,7 +2066,7 @@ details[open] > .header__icon--menu .icon-hamburger {
 }
 
 .header__submenu.list-menu {
-  padding: 2rem 0;
+  padding: 3.6rem 0;
 }
 
 .header__submenu .header__submenu {
@@ -2113,4 +2126,13 @@ details-disclosure > details {
   .overflow-hidden-tablet {
     overflow: auto;
   }
+}
+
+/* Slidecart specifics */
+#slidecarthq .slidecarthq:not(#foo) {
+  background-color: #f7f2e9;
+}
+
+html body #slidecarthq .header h2 span {
+  display: none;
 }

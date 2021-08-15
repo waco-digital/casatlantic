@@ -333,6 +333,7 @@ class MenuDrawer extends HTMLElement {
       this.mainDetailsToggle.classList.remove("menu-opening");
       this.mainDetailsToggle.querySelectorAll("details").forEach(details => {
         details.removeAttribute("open");
+
         details.classList.remove("menu-opening");
       });
       this.mainDetailsToggle
@@ -381,6 +382,7 @@ class MenuDrawer extends HTMLElement {
         window.requestAnimationFrame(handleAnimation);
       } else {
         detailsElement.removeAttribute("open");
+
         if (detailsElement.closest("details[open]")) {
           trapFocus(
             detailsElement.closest("details[open]"),
@@ -456,6 +458,7 @@ class ModalDialog extends HTMLElement {
   hide() {
     document.body.classList.remove("overflow-hidden");
     this.removeAttribute("open");
+
     removeTrapFocus(this.openedBy);
     window.pauseAllMedia();
   }
@@ -572,7 +575,6 @@ class VariantSelects extends HTMLElement {
   }
 
   onVariantChange() {
-    console.log(this);
     this.updateOptions();
     this.updateMasterId();
     this.toggleAddButton(true, "", false);

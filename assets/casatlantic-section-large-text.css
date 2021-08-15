@@ -1,3 +1,9 @@
 .casatlantic-large-text {
   padding: 8rem 0 6rem;
 }
+
+@media screen and (max-width: 980px) {
+  .casatlantic-large-text {
+    padding: 2rem;
+  }
+}
