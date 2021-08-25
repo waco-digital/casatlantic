@@ -1,26 +1,36 @@
 {{ 'casatlantic-section-multilink-banner.css' | asset_url | stylesheet_tag }}
 
-<div class="casatlantic-multilink-banner {% if section.settings.horizontal_padding %}casatlantic-multilink-banner--horizontal-padding{%- endif -%} {% if section.settings.desktop_text_box_position %} casatlantic-multilink-banner--text-{{section.settings.desktop_text_box_position}}{%- endif -%} " id="Banner-{{ section.id }}">
-    <div class="casatlantic-multilink-banner__first-column  color-{{ section.settings.color_scheme }}">
-        {%- if section.settings.image != blank -%}
-            <div class="casatlantic-multilink-banner__media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} casatlantic-multilink-banner__media-half{% endif %}">
+<div class="casatlantic-multilink-banner {% if section.settings.image != blank and section.settings.image_2 != blank and section.settings.image_3 != blank %} three-columns {% endif %} {% if section.settings.horizontal_padding %}casatlantic-multilink-banner--horizontal-padding{%- endif -%} {% if section.settings.desktop_text_box_position %} casatlantic-multilink-banner--text-{{section.settings.desktop_text_box_position}}{%- endif -%} " id="Banner-{{ section.id }}">
+    {%- if section.settings.image != blank -%}
+        <div class="casatlantic-multilink-banner__first-column  color-{{ section.settings.color_scheme }}">
+            <div class="casatlantic-multilink-banner__media">
                 <a href="{{ section.settings.button_link }}">
                     <img class="casatlantic-multilink-banner__image" srcset="{%- if section.settings.image.width >= 375 -%}{{ section.settings.image | img_url: '375x' }} 375w,{%- endif -%} {%- if section.settings.image.width >= 750 -%}{{ section.settings.image | img_url: '750x' }} 750w,{%- endif -%} {%- if section.settings.image.width >= 1100 -%}{{ section.settings.image | img_url: '1100x' }} 1100w,{%- endif -%} {%- if section.settings.image.width >= 1500 -%}{{ section.settings.image | img_url: '1500x' }} 1500w,{%- endif -%} {%- if section.settings.image.width >= 1780 -%}{{ section.settings.image | img_url: '1780x' }} 1780w,{%- endif -%} {%- if section.settings.image.width >= 2000 -%}{{ section.settings.image | img_url: '2000x' }} 2000w,{%- endif -%} {%- if section.settings.image.width >= 2800 -%}{{ section.settings.image | img_url: '2800x' }} 2800w{%- endif -%}" sizes="{% if section.settings.image_2 != blank%}(min-width: 750px) 50vw, 100vw{% elsif section.settings.image_2 != blank %}50vw{% else %}100vw{% endif %}" src="{{ section.settings.image | img_url: '750x' }}" loading="lazy" alt="{{ section.settings.image.alt | escape }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.width | divided_by: section.settings.image.aspect_ratio }}" {% if section.settings.image_2 != blank %} class="casatlantic-multilink-banner__media-image-half" {% endif %}>
                 </a>
             </div>
-        {%- endif -%}
-        <a class="casatlantic-multilink-banner__link underlined-link" href="{{ section.settings.button_link }}">{{ section.settings.button_text }}</a>
-    </div>
-    <div class="casatlantic-multilink-banner__second-column  color-{{ section.settings.color_scheme }}">
-        {%- if section.settings.image_2 != blank -%}
-            <div class="casatlantic-multilink-banner__media{% if section.settings.image != blank %} casatlantic-multilink-banner__media-half{% endif %}">
-                <a href="{{ section.settings.button_link }}">
-                    <img class="casatlantic-multilink-banner__image" srcset="{%- if section.settings.image_2.width >= 375 -%}{{ section.settings.image_2 | img_url: '375x' }} 375w,{%- endif -%} {%- if section.settings.image_2.width >= 750 -%}{{ section.settings.image_2 | img_url: '750x' }} 750w,{%- endif -%} {%- if section.settings.image_2.width >= 1100 -%}{{ section.settings.image_2 | img_url: '1100x' }} 1100w,{%- endif -%} {%- if section.settings.image_2.width >= 1500 -%}{{ section.settings.image_2 | img_url: '1500x' }} 1500w,{%- endif -%} {%- if section.settings.image_2.width >= 1780 -%}{{ section.settings.image_2 | img_url: '1780x' }} 1780w,{%- endif -%} {%- if section.settings.image_2.width >= 2000 -%}{{ section.settings.image_2 | img_url: '2000x' }} 2000w,{%- endif -%} {%- if section.settings.image_2.width >= 2800 -%}{{ section.settings.image_2 | img_url: '2800x' }} 2800w{%- endif -%}" sizes="{% if section.settings.image != blank %}(min-width: 750px) 50vw, 100vw{% else %}100vw{% endif %}" src="{{ section.settings.image_2 | img_url: '750x' }}" loading="lazy" alt="{{ section.settings.image_2.alt | escape }}" width="{{ section.settings.image_2.width }}" height="{{ section.settings.image_2.width | divided_by: section.settings.image_2.aspect_ratio }}" {% if section.settings.image != blank %} class="casatlantic-multilink-banner__media-image-half" {% endif %}>
+            <a class="casatlantic-multilink-banner__link underlined-link" href="{{ section.settings.button_link }}">{{ section.settings.button_text }}</a>
+        </div>
+    {%- endif -%}
+    {%- if section.settings.image_2 != blank -%}
+        <div class="casatlantic-multilink-banner__second-column  color-{{ section.settings.color_scheme }}">
+            <div class="casatlantic-multilink-banner__media">
+                <a href="{{ section.settings.button_link_2 }}">
+                    <img class="casatlantic-multilink-banner__image" srcset="{%- if section.settings.image_2.width >= 375 -%}{{ section.settings.image_2 | img_url: '375x' }} 375w,{%- endif -%} {%- if section.settings.image_2.width >= 750 -%}{{ section.settings.image_2 | img_url: '750x' }} 750w,{%- endif -%} {%- if section.settings.image_2.width >= 1100 -%}{{ section.settings.image_2 | img_url: '1100x' }} 1100w,{%- endif -%} {%- if section.settings.image_2.width >= 1500 -%}{{ section.settings.image_2 | img_url: '1500x' }} 1500w,{%- endif -%} {%- if section.settings.image_2.width >= 1780 -%}{{ section.settings.image_2 | img_url: '1780x' }} 1780w,{%- endif -%} {%- if section.settings.image_2.width >= 2000 -%}{{ section.settings.image_2 | img_url: '2000x' }} 2000w,{%- endif -%} {%- if section.settings.image_2.width >= 2800 -%}{{ section.settings.image_2 | img_url: '2800x' }} 2800w{%- endif -%}" sizes="{% if section.settings.image != blank %}(min-width: 750px) 50vw, 100vw{% else %}100vw{% endif %}" src="{{ section.settings.image_2 | img_url: '750x' }}" loading="lazy" alt="{{ section.settings.image_2.alt | escape }}" width="{{ section.settings.image_2.width }}" height="{{ section.settings.image_2.width | divided_by: section.settings.image_2.aspect_ratio }}" {% if section.settings.image_2 != blank %} class="casatlantic-multilink-banner__media-image-half" {% endif %}>
                 </a>
             </div>
-        {%- endif -%}
-        <a class="casatlantic-multilink-banner__link underlined-link" href="{{ section.settings.button_link_2 }}">{{ section.settings.button_text_2 }}</a>
-    </div>
+            <a class="casatlantic-multilink-banner__link underlined-link" href="{{ section.settings.button_link_2 }}">{{ section.settings.button_text_2 }}</a>
+        </div>
+    {%- endif -%}
+    {%- if section.settings.image_3 != blank -%}
+        <div class="casatlantic-multilink-banner__second-column  color-{{ section.settings.color_scheme }}">
+            <div class="casatlantic-multilink-banner__media">
+                <a href="{{ section.settings.button_link_3 }}">
+                    <img class="casatlantic-multilink-banner__image" srcset="{%- if section.settings.image_3.width >= 375 -%}{{ section.settings.image_3 | img_url: '375x' }} 375w,{%- endif -%} {%- if section.settings.image_3.width >= 750 -%}{{ section.settings.image_3 | img_url: '750x' }} 750w,{%- endif -%} {%- if section.settings.image_3.width >= 1100 -%}{{ section.settings.image_3 | img_url: '1100x' }} 1100w,{%- endif -%} {%- if section.settings.image_3.width >= 1500 -%}{{ section.settings.image_3 | img_url: '1500x' }} 1500w,{%- endif -%} {%- if section.settings.image_3.width >= 1780 -%}{{ section.settings.image_3 | img_url: '1780x' }} 1780w,{%- endif -%} {%- if section.settings.image_3.width >= 2000 -%}{{ section.settings.image_3 | img_url: '2000x' }} 2000w,{%- endif -%} {%- if section.settings.image_3.width >= 2800 -%}{{ section.settings.image_3 | img_url: '2800x' }} 2800w{%- endif -%}" sizes="{% if section.settings.image != blank %}(min-width: 750px) 50vw, 100vw{% else %}100vw{% endif %}" src="{{ section.settings.image_3 | img_url: '750x' }}" loading="lazy" alt="{{ section.settings.image_3.alt | escape }}" width="{{ section.settings.image_3.width }}" height="{{ section.settings.image_3.width | divided_by: section.settings.image_3.aspect_ratio }}" {% if section.settings.image_3 != blank %} class="casatlantic-multilink-banner__media-image-half" {% endif %}>
+                </a>
+            </div>
+            <a class="casatlantic-multilink-banner__link underlined-link" href="{{ section.settings.button_link_3 }}">{{ section.settings.button_text_3 }}</a>
+        </div>
+    {%- endif -%}
 </div>
 
 {% schema %}
@@ -54,6 +64,18 @@
             "type": "url",
             "id": "button_link_2",
             "label": "t:sections.casatlantic-multilink-banner.settings.button_link_2.label"
+        }, {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "t:sections.casatlantic-multilink-banner.settings.image_3.label"
+        }, {
+            "type": "text",
+            "id": "button_text_3",
+            "label": "t:sections.casatlantic-multilink-banner.settings.button_text_3.label"
+        }, {
+            "type": "url",
+            "id": "button_link_3",
+            "label": "t:sections.casatlantic-multilink-banner.settings.button_link_3.label"
         }, {
             "type": "select",
             "id": "desktop_text_box_position",

@@ -2136,3 +2136,49 @@ details-disclosure > details {
 html body #slidecarthq .header h2 span {
   display: none;
 }
+
+footer.footer.new-footer.sticky_checkout:not(#foo) {
+  background-color: transparent;
+  margin-top: initial;
+}
+
+#slidecarthq .footer-sticky:not(#foo) {
+  background-color: transparent;
+}
+
+#slidecarthq .header button:not(#foo) {
+  background-color: transparent;
+  margin-right: -10px;
+}
+
+#slidecarthq .header button:not(#foo) svg path,
+#slidecarthq .item .main-top button:not(#foo) svg path {
+  fill: rgb(49, 47, 42);
+}
+
+#slidecarthq h3.title {
+  text-transform: uppercase;
+}
+
+#slidecarthq .button.full:not(#foo) {
+  text-transform: uppercase;
+  font-family: var(--font-heading-family);
+  letter-spacing: 0.08rem;
+  border-radius: 0;
+}
+
+html body #slidecarthq .header h2:not(#foo) {
+  font-family: var(--font-body-family);
+  font-weight: var(--font-body-weight);
+}
+
+#slidecarthq .footer-row .shipping-cost,
+#slidecarthq .footer-row .shipping-cost span,
+#slidecarthq .footer-row .shipping-cost span a {
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  color: #312f2a;
+  text-transform: none;
+  font-family: var(--font-body-family);
+  font-weight: var(--font-body-weight);
+}
